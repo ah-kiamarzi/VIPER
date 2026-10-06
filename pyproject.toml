@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shm-edge"
+version = "1.0.0"
+description = "Unsupervised vibration anomaly detection on SysId-derived FRF features for ultra-low-power MCUs"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+dependencies = [
+    "numpy",
+    "scipy",
+    "pandas",
+    "pyarrow",
+    "scikit-learn",
+    "torch>=2.1",
+]
+
+[project.optional-dependencies]
+onnx = ["onnx", "onnxscript"]
+
+[tool.setuptools.packages.find]
+include = ["shm_edge*"]

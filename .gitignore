@@ -1,0 +1,25 @@
+# Data: never commit the dataset or derived features
+data/
+*.mat
+*.feather
+*.csv
+*.db
+*.zip
+*.npy
+*.npz
+
+# Trained weights, exports and results
+runs/
+*.pt
+*.pth
+*.onnx
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.ipynb_checkpoints/
