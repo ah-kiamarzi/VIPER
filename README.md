@@ -169,40 +169,6 @@ Window the raw recordings, e.g. as input to your own SysId implementation:
 python scripts/prepare_windows.py --data-dir data/raw --out-dir data/windows --format mat
 ```
 
-## Default settings
-
-| | FC-AE | CNN-AE | Att-CNN-AE |
-|---|---|---|---|
-| Input (`--band peaks`) | bins 8–102, zero-padded to 128 | bins 8–102, zero-padded to 96 | bins 8–102, zero-padded to 128 |
-| Parameters (at that input) | 21.3 k | 42.9 k | 37.2 k |
-| Optimizer | Adam, lr 5e-3, β = (0.9, 0.98) | Adam, lr 5e-3, β = (0.9, 0.98) | Adam, lr 1e-3 |
-| Batch size / epochs | 16 / 100 | 16 / 100 | 16 / 100 |
-| Weights evaluated | last epoch | last epoch | best validation epoch |
-| Threshold percentile | 50th | 50th | 70th |
-
-With `--band full` (512 bins), the FC-AE has 352 k parameters (512 → 256 → 128 → 64 → 32 and back).
-
-These defaults are stored in `shm_edge.models.MODELS`, and every value can be overridden from the command line.
-
-## Results
-
-Evaluating the paper's trained FP32 models with this code, using the default settings above, gives:
-
-| Metric | FC-AE | CNN-AE |
-|---|---|---|
-| Accuracy [%] | 89.90 | 88.79 |
-| ROC-AUC | 93.14 | 91.79 |
-| PR-AUC | 99.06 | 98.88 |
-
-Training from scratch on a different machine or seed will give slightly different numbers.
-
-On the GAP9 SoC, including the SysId pre-processing, the paper reports:
-
-- FC-AE: 0.37 ms per inference (NE16, INT8, 370 MHz) and 12.5 µJ per inference (low-power mode, 240 MHz).
-- CNN-AE: 0.94 ms and 35.4 µJ under the same settings.
-
-See the paper for the full profiling.
-
 ## GAP9 deployment
 
 1. Export the trained model with `scripts/export_onnx.py`.
@@ -228,3 +194,4 @@ If you use this code or the dataset, please cite:
 ## License
 
 This project is released under the GNU General Public License v3.0. See [LICENSE](LICENSE).
+
